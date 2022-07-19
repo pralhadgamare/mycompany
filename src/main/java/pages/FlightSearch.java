@@ -1,5 +1,21 @@
 package pages;
 
-public class FlightSearch {
+import org.openqa.selenium.WebDriver;
 
+public class FlightSearch 
+{  
+   	
+   
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 }
