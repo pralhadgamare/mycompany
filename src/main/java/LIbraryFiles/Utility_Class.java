@@ -7,6 +7,7 @@ import java.io.IOException;
 import java.util.Properties;
 import java.util.logging.FileHandler;
 
+import org.apache.poi.EncryptedDocumentException;
 import org.apache.poi.ss.usermodel.Sheet;
 import org.apache.poi.ss.usermodel.WorkbookFactory;
 import org.openqa.selenium.OutputType;
@@ -31,7 +32,7 @@ public class Utility_Class
 	}
 	
 	//screenshot capture
-	public static void capturescreenshot(WebDriver driver   ) throws IOException
+	public static void capturescreenshot(WebDriver driver) throws IOException
 	{
 		File src = ((TakesScreenshot)driver).getScreenshotAs(OutputType.FILE);
 		
@@ -42,11 +43,11 @@ public class Utility_Class
 	}
 	
 	//fetch the excel data
-	public static String getpfdata(int r ,int c ,String Sheet) throws FileNotFoundException, IOException
+	public static String getpfdata(int r ,int c ,String sheet) throws FileNotFoundException, IOException
 	{
 		FileInputStream file = new FileInputStream(Utility_Class.gettestdata("excelpath"));
        
-	 Sheet sh = WorkbookFactory.create(file).getSheet(Sheet);
+	 Sheet sh = WorkbookFactory.create(file).getSheet(sheet);
 	 
 	    String ReadExcelData = sh.getRow(r).getCell(c).getStringCellValue();
 	 
@@ -54,13 +55,17 @@ public class Utility_Class
 		
 	}
 	
+	//to increase the row number from excel sheet
+	public static int getRow(String Sheet) throws EncryptedDocumentException, IOException 
+	{
+        
+        FileInputStream file = new FileInputStream(Utility_Class.gettestdata("excelpath"));
+        Sheet sh = WorkbookFactory.create(file).getSheet(Sheet);
+        
+        int rows = sh.getLastRowNum();
+        System.out.println("Total No of Rows = "+rows);
+        return rows;
+        
+    }
 	
-	
-	
-	
-	
-	
-	
-	
-
-}
+	}
